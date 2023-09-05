@@ -28,6 +28,20 @@ function changeSlide(direction) {
     }, 300); // Adjust this duration to match the video's length if needed
 }
 
+function throttle(func, limit = 1100) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
         changeSlide("next");
@@ -36,10 +50,11 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-document.addEventListener('wheel', (event) => {
+document.addEventListener('wheel', throttle((event) => {
     if (event.deltaY > 0) {
         changeSlide("next");
     } else if (event.deltaY < 0) {
         changeSlide("prev");
     }
-});
+}));
+
