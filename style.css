@@ -1,0 +1,40 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.static-effect {
+    position: fixed;     /* Makes the video fixed on the page */
+    top: 50%;            /* Center the video vertically */
+    left: 50%;           /* Center the video horizontally */
+    min-width: 100%;     /* Ensure it covers the full width */
+    min-height: 100%;    /* Ensure it covers the full height */
+    width: auto;         /* Maintain aspect ratio */
+    height: auto;        /* Maintain aspect ratio */
+    z-index: 1000;       /* Keep video on top */
+    transform: translate(-50%, -50%); /* Proper centering */
+    pointer-events: none; /* Makes sure the video doesn't interfere with clicks */
+}
+
+.slide-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slide {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(100%);
+}
+
+.slide#about {
+    transform: translateY(0);
+}
+
