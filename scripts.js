@@ -28,7 +28,7 @@ function changeSlide(direction) {
     }, 300); // Adjust this duration to match the video's length if needed
 }
 
-function throttle(func, limit = 1100) {
+function throttle(func, limit = 1200) {
     let inThrottle;
     return function() {
         const args = arguments;
