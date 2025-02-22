@@ -8,6 +8,7 @@ staticEffect.style.display = 'none';
 function changeSlide(direction) {
     // Show the video before playing
     staticEffect.style.display = 'block';
+    staticEffect.style.opacity = '1'; // Ensure video is fully visible
 
     staticEffect.load();
     staticEffect.play();
@@ -23,8 +24,11 @@ function changeSlide(direction) {
 
         slides[currentSlide].style.transform = "translateY(0)";
 
-        // Hide the video after transition
-        staticEffect.style.display = 'none';
+        // Fade out the video after transition
+        staticEffect.style.opacity = '0'; // Start fading out
+        setTimeout(() => {
+            staticEffect.style.display = 'none'; // Hide video after fade out
+        }, 500); // Match this duration with the CSS transition duration
     }, 300); // Adjust this duration to match the video's length if needed
 }
 
@@ -41,20 +45,20 @@ function throttle(func, limit = 1200) {
     }
 }
 
+$(window).on('load', addNoise);
+
+function addNoise() {
+    document.querySelector('.noise-wrapper').style.opacity = 1;
+  }
+
 
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+    if (event.key === 'f' ) {
         changeSlide("next");
-    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-        changeSlide("prev");
-    }
+    } 
+
 });
 
-document.addEventListener('wheel', throttle((event) => {
-    if (event.deltaY > 0) {
-        changeSlide("next");
-    } else if (event.deltaY < 0) {
-        changeSlide("prev");
-    }
-}));
+
+
 
