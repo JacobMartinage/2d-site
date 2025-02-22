@@ -8,7 +8,6 @@ staticEffect.style.display = 'none';
 function changeSlide(direction) {
     // Show the video before playing
     staticEffect.style.display = 'block';
-    staticEffect.style.opacity = '1'; // Ensure video is fully visible
 
     staticEffect.load();
     staticEffect.play();
@@ -24,11 +23,8 @@ function changeSlide(direction) {
 
         slides[currentSlide].style.transform = "translateY(0)";
 
-        // Fade out the video after transition
-        staticEffect.style.opacity = '0'; // Start fading out
-        setTimeout(() => {
-            staticEffect.style.display = 'none'; // Hide video after fade out
-        }, 500); // Match this duration with the CSS transition duration
+        // Hide the video after transition
+        staticEffect.style.display = 'none';
     }, 300); // Adjust this duration to match the video's length if needed
 }
 
@@ -49,15 +45,19 @@ $(window).on('load', addNoise);
 
 function addNoise() {
     document.querySelector('.noise-wrapper').style.opacity = 1;
-  }
+}
 
-
+// Event listener for keydown events
 document.addEventListener('keydown', (event) => {
-    if (event.key === 'f' ) {
+    if (event.key === ' ') { // Spacebar
         changeSlide("next");
-    } 
-
+    } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+        changeSlide("next");
+    } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+        changeSlide("prev");
+    }
 });
+
 
 
 
